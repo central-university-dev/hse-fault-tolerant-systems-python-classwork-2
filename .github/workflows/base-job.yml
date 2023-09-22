@@ -13,4 +13,4 @@ jobs:
     steps:
     - name: base-job
       run: |
-        echo "This job will be run with EXAMPLE_ENV=$EXAMPLE_ENV"
+        echo "This job will be run with EXAMPLE_ENV=${{ inputs.EXAMPLE_ENV }}"
