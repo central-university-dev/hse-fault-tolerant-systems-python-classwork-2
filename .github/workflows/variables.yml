@@ -1,0 +1,25 @@
+name: variables
+
+on: push
+
+permissions:
+  contents: read
+
+env:
+  EXAMPLE_ENV: "Development"
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - name: default-variable
+      run: |
+        echo "This job is run with default variable value"
+        echo "EXAMPLE_ENV=$EXAMPLE_ENV"
+      
+    - name: overrided-variable
+      env:
+        EXAMPLE_ENV: "Production"
+      run: |
+        echo "This job is run with OVERRIDED variable value"
+        echo "EXAMPLE_ENV=$EXAMPLE_ENV"
