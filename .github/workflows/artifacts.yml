@@ -1,0 +1,60 @@
+name: artifacts
+
+on: push
+
+permissions:
+  contents: read
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download source code from repository
+      uses: actions/checkout@v4.1.0
+      
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4.7.0
+      with:
+        python-version: "3.10"
+        
+    - name: write-files
+      run: |
+        echo "This Pipeline is the same as writer-app/.gitlab-ci.yml"
+        echo "But this Pipeline will save new files to artifacts and pass it to another job"
+        echo "Lets run writer.py to create two new files"
+        python writer.py
+        echo "Lets check directory content again and see two new files"
+        python simple-app.py
+        echo "This new files test1.txt and test2.txt will be saved to artifacts"
+        
+    - name: save-artifacts
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        path: |
+          ./test1.txt
+          ./test2.txt
+
+  post-main:
+    runs-on: ubuntu-latest
+    needs: main
+    steps:
+    - name: Download source code from repository
+      uses: actions/checkout@v4.1.0
+      
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4.7.0
+      with:
+        python-version: "3.10"
+
+    - name: download-artifacts
+      uses: actions/download-artifact@v2.1.1
+      with:
+        path: |
+          ./test1.txt
+          ./test2.txt
+        
+    - name: simple-app
+      run: |
+        echo "This job download artifacts from previous job"
+        echo "Lets run simple-app.py and see new files now EXIST in this job"
+        python simple-app.py
