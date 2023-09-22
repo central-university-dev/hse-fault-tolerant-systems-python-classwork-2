@@ -1,0 +1,28 @@
+name: simple-app
+
+on: push
+
+permissions:
+  contents: read
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download source code from repository
+      uses: actions/checkout@4.1.0
+      
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4.7.0
+      with:
+        python-version: "3.10"
+      
+    - name: simple-run
+      run: |
+        echo "This job just run simple-app.py"
+        python simple-app.py
+        
+    - name: print-file-content
+      run: |
+        echo "This job run simple-app.py with argument which will print file content"
+        python simple-app.py test.txt
