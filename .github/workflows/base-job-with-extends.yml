@@ -6,21 +6,15 @@ permissions:
   contents: read
 
 jobs:
-  main:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download source code from repository
-      uses: actions/checkout@v4.1.0
-      
-    - name: dev-run
-      uses: ./.github/workflows/base-job.yml
-      
-    - name: test-run
-      uses: ./.github/workflows/base-job.yml
-      with:
-        EXAMPLE_ENV: "Test"
-        
-    - name: prod-run
-      uses: ./.github/workflows/base-job.yml
-      with:
-        EXAMPLE_ENV: "Prod"
+  dev-run:
+    uses: ./.github/workflows/base-job.yml
+
+  test-run:
+    uses: ./.github/workflows/base-job.yml
+    with:
+      EXAMPLE_ENV: "Test"
+
+  prod-run:
+    uses: ./.github/workflows/base-job.yml
+    with:
+      EXAMPLE_ENV: "Prod"
