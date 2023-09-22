@@ -1,0 +1,21 @@
+name: base-job-with-extends
+
+on: push
+
+permissions:
+  contents: read
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - name: dev-run
+      uses: ./.github/workflows/base-job.yml
+    - name: test-run
+      uses: ./.github/workflows/base-job.yml
+      with:
+        EXAMPLE_ENV: "Test"
+    - name: prod-run
+      uses: ./.github/workflows/base-job.yml
+      with:
+        EXAMPLE_ENV: "Prod"
