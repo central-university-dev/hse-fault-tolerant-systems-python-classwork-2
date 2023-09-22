@@ -47,10 +47,10 @@ jobs:
       with:
         python-version: "3.10"
 
-    #- name: download-artifacts
-    #  uses: actions/download-artifact@v2.1.1
-    #  with:
-    #    name: my-artifact.zip
+    - name: download-artifacts
+      uses: actions/download-artifact@v2.1.1
+      with:
+        name: my-artifact.zip
 
     #- name: unzip-artifacts
     #  run: |
