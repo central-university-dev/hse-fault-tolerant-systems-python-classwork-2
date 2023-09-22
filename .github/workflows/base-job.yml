@@ -1,4 +1,4 @@
-name: base-job-with-extends
+name: base-job
 
 on:
   workflow_call:
